@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="charts/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
+    <script src="charts/nv.d3.js"></script>
+    <script src="charts/stream_layers.js"></script>
+     <script src="charts/jquery-3.3.1.min.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, #chart1, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class='topn'>
+<select>
+  N Most Polarized Words
+  <option selected disabled>N Words to Display</option>
+  <option value="10">10</option>
+  <option value="20">20</option>
+  <option value="30">30</option>
+  <option value="40">40</option>
+  <option value="50">50</option>
+</select>
+</div>
+<div id="chart1" class='with-3d-shadow with-transitions'>
+    <svg></svg>
+</div>
+
+<script>
+		let data = [{'key': 'Positive', 'values': [{'label': 'network', 'value': 0.9056603773584906}, {'label': 'chrome', 'value': 0.9056603773584906}, {'label': 'need', 'value': 0.10989010989010987}, {'label': 'had', 'value': 0.11363636363636365}, {'label': 'since', 'value': 0.11904761904761905}, {'label': 'GoogleAI', 'value': 0.8765432098765432}, {'label': 'Are', 'value': 0.8765432098765432}, {'label': 'yandex', 'value': 0.8765432098765432}, {'label': 'webspacex', 'value': 0.8765432098765432}, {'label': 'BaiduResearch', 'value': 0.8765432098765432}, {'label': 'Cointelegraph', 'value': 0.8765432098765432}, {'label': 'TamaraMcCleary', 'value': 0.8765432098765432}, {'label': 't.co/NaHbQpI1PG', 'value': 0.8666666666666667}, {'label': 'best', 'value': 0.8666666666666667}, {'label': 't.co/7uOXDvNY0j', 'value': 0.8666666666666667}, {'label': 'response', 'value': 0.8529411764705882}, {'label': 'Hi', 'value': 0.8529411764705882}, {'label': 'CryptoCoinsNews', 'value': 0.8529411764705882}, {'label': 'notes', 'value': 0.8529411764705882}, {'label': 'bing', 'value': 0.8529411764705882}, {'label': 'free', 'value': 0.8529411764705882}, {'label': 'does', 'value': 0.14925373134328354}, {'label': 'ca', 'value': 0.15625}, {'label': 'every', 'value': 0.16666666666666666}, {'label': 'So', 'value': 0.17543859649122806}, {'label': 'could', 'value': 0.17543859649122806}, {'label': 'color', 'value': 0.8181818181818182}, {'label': 'view', 'value': 0.8181818181818182}, {'label': 'augustf', 'value': 0.8181818181818182}, {'label': 'preferences', 'value': 0.8181818181818182}, {'label': 'projects', 'value': 0.8181818181818182}, {'label': 'truth', 'value': 0.8181818181818182}, {'label': 'person', 'value': 0.8181818181818182}, {'label': 'profiles', 'value': 0.8181818181818182}, {'label': 'Adobe', 'value': 0.8181818181818182}, {'label': 'suggestion', 'value': 0.8181818181818182}, {'label': 'purpleidea', 'value': 0.8181818181818182}, {'label': 'acruiz', 'value': 0.8181818181818182}, {'label': 'thank', 'value': 0.8076923076923077}, {'label': 'make', 'value': 0.2}, {'label': 'no', 'value': 0.2040816326530612}, {'label': 'fxhelp', 'value': 0.7959183673469387}, {'label': 'from', 'value': 0.2127659574468085}, {'label': 're', 'value': 0.7872340425531915}, {'label': "n't", 'value': 0.2127659574468085}, {'label': 'check', 'value': 0.7826086956521741}, {'label': 'working', 'value': 0.2173913043478261}, {'label': 'Go', 'value': 0.7777777777777778}, {'label': 'Yahoo', 'value': 0.7777777777777778}, {'label': 'my', 'value': 0.2222222222222222}, {'label': 'because', 'value': 0.2272727272727273}, {'label': 'too', 'value': 0.2325581395348837}, {'label': 'Mozilla', 'value': 0.2325581395348837}, {'label': 'restore', 'value': 0.2325581395348837}, {'label': 'sync', 'value': 0.2325581395348837}, {'label': 'file', 'value': 0.2325581395348837}, {'label': 'before', 'value': 0.2325581395348837}, {'label': 'Just', 'value': 0.2325581395348837}, {'label': 'maybe', 'value': 0.7619047619047619}, {'label': 'versions', 'value': 0.7619047619047619}, {'label': 'test', 'value': 0.7619047619047619}, {'label': 'Reader', 'value': 0.7619047619047619}, {'label': 'heytoomey', 'value': 0.7619047619047619}, {'label': 'part', 'value': 0.7619047619047619}, {'label': 'WebspaceX', 'value': 0.7619047619047619}, {'label': 'world', 'value': 0.7619047619047619}, {'label': 'Use', 'value': 0.7619047619047619}, {'label': 'somewhere', 'value': 0.7619047619047619}, {'label': 'bit', 'value': 0.7619047619047619}, {'label': '100', 'value': 0.7619047619047619}, {'label': 'avenant_m', 'value': 0.7619047619047619}, {'label': 'child', 'value': 0.7619047619047619}, {'label': 'results', 'value': 0.7619047619047619}, {'label': 'Bookmark', 'value': 0.7619047619047619}, {'label': 'SwitchToFirefox', 'value': 0.7619047619047619}, {'label': 'love', 'value': 0.7619047619047619}, {'label': 'media', 'value': 0.7619047619047619}, {'label': 'Check', 'value': 0.7619047619047619}, {'label': 'Adblock', 'value': 0.7619047619047619}, {'label': 'general', 'value': 0.7619047619047619}, {'label': 'blocker', 'value': 0.7619047619047619}, {'label': 'Microsoft', 'value': 0.7619047619047619}, {'label': 'profit', 'value': 0.7619047619047619}, {'label': 'Win', 'value': 0.7619047619047619}, {'label': 'suggest', 'value': 0.7619047619047619}, {'label': 'Bitdefender', 'value': 0.7619047619047619}, {'label': 'source', 'value': 0.7619047619047619}, {'label': 'pathaksudh', 'value': 0.7619047619047619}, {'label': 'workaround', 'value': 0.7619047619047619}, {'label': 'Help', 'value': 0.7619047619047619}, {'label': 'chromium', 'value': 0.7619047619047619}, {'label': 'changed', 'value': 0.7619047619047619}, {'label': 'container', 'value': 0.7619047619047619}, {'label': 'dark', 'value': 0.7619047619047619}, {'label': 'Add-on', 'value': 0.7619047619047619}, {'label': 'was', 'value': 0.2439024390243903}, {'label': 'learn', 'value': 0.75}, {'label': 'Thank', 'value': 0.75}, {'label': 'And', 'value': 0.25}, {'label': 'pieterratering', 'value': 0.9159663865546218}]}, {'key': 'Negative', 'values': [{'label': 'network', 'value': -0.09433962264150944}, {'label': 'chrome', 'value': -0.09433962264150944}, {'label': 'need', 'value': -0.8901098901098901}, {'label': 'had', 'value': -0.8863636363636362}, {'label': 'since', 'value': -0.8809523809523809}, {'label': 'GoogleAI', 'value': -0.1234567901234568}, {'label': 'Are', 'value': -0.1234567901234568}, {'label': 'yandex', 'value': -0.1234567901234568}, {'label': 'webspacex', 'value': -0.1234567901234568}, {'label': 'BaiduResearch', 'value': -0.1234567901234568}, {'label': 'Cointelegraph', 'value': -0.1234567901234568}, {'label': 'TamaraMcCleary', 'value': -0.1234567901234568}, {'label': 't.co/NaHbQpI1PG', 'value': -0.13333333333333333}, {'label': 'best', 'value': -0.13333333333333333}, {'label': 't.co/7uOXDvNY0j', 'value': -0.13333333333333333}, {'label': 'response', 'value': -0.14705882352941174}, {'label': 'Hi', 'value': -0.14705882352941174}, {'label': 'CryptoCoinsNews', 'value': -0.14705882352941174}, {'label': 'notes', 'value': -0.14705882352941174}, {'label': 'bing', 'value': -0.14705882352941174}, {'label': 'free', 'value': -0.14705882352941174}, {'label': 'does', 'value': -0.8507462686567164}, {'label': 'ca', 'value': -0.84375}, {'label': 'every', 'value': -0.8333333333333334}, {'label': 'So', 'value': -0.8245614035087719}, {'label': 'could', 'value': -0.8245614035087719}, {'label': 'color', 'value': -0.18181818181818185}, {'label': 'view', 'value': -0.18181818181818185}, {'label': 'augustf', 'value': -0.18181818181818185}, {'label': 'preferences', 'value': -0.18181818181818185}, {'label': 'projects', 'value': -0.18181818181818185}, {'label': 'truth', 'value': -0.18181818181818185}, {'label': 'person', 'value': -0.18181818181818185}, {'label': 'profiles', 'value': -0.18181818181818185}, {'label': 'Adobe', 'value': -0.18181818181818185}, {'label': 'suggestion', 'value': -0.18181818181818185}, {'label': 'purpleidea', 'value': -0.18181818181818185}, {'label': 'acruiz', 'value': -0.18181818181818185}, {'label': 'thank', 'value': -0.1923076923076923}, {'label': 'make', 'value': -0.8}, {'label': 'no', 'value': -0.7959183673469387}, {'label': 'fxhelp', 'value': -0.2040816326530612}, {'label': 'from', 'value': -0.7872340425531915}, {'label': 're', 'value': -0.2127659574468085}, {'label': "n't", 'value': -0.7872340425531915}, {'label': 'check', 'value': -0.2173913043478261}, {'label': 'working', 'value': -0.7826086956521741}, {'label': 'Go', 'value': -0.2222222222222222}, {'label': 'Yahoo', 'value': -0.2222222222222222}, {'label': 'my', 'value': -0.7777777777777778}, {'label': 'because', 'value': -0.7727272727272726}, {'label': 'too', 'value': -0.7674418604651163}, {'label': 'Mozilla', 'value': -0.7674418604651163}, {'label': 'restore', 'value': -0.7674418604651163}, {'label': 'sync', 'value': -0.7674418604651163}, {'label': 'file', 'value': -0.7674418604651163}, {'label': 'before', 'value': -0.7674418604651163}, {'label': 'Just', 'value': -0.7674418604651163}, {'label': 'maybe', 'value': -0.2380952380952381}, {'label': 'versions', 'value': -0.2380952380952381}, {'label': 'test', 'value': -0.2380952380952381}, {'label': 'Reader', 'value': -0.2380952380952381}, {'label': 'heytoomey', 'value': -0.2380952380952381}, {'label': 'part', 'value': -0.2380952380952381}, {'label': 'WebspaceX', 'value': -0.2380952380952381}, {'label': 'world', 'value': -0.2380952380952381}, {'label': 'Use', 'value': -0.2380952380952381}, {'label': 'somewhere', 'value': -0.2380952380952381}, {'label': 'bit', 'value': -0.2380952380952381}, {'label': '100', 'value': -0.2380952380952381}, {'label': 'avenant_m', 'value': -0.2380952380952381}, {'label': 'child', 'value': -0.2380952380952381}, {'label': 'results', 'value': -0.2380952380952381}, {'label': 'Bookmark', 'value': -0.2380952380952381}, {'label': 'SwitchToFirefox', 'value': -0.2380952380952381}, {'label': 'love', 'value': -0.2380952380952381}, {'label': 'media', 'value': -0.2380952380952381}, {'label': 'Check', 'value': -0.2380952380952381}, {'label': 'Adblock', 'value': -0.2380952380952381}, {'label': 'general', 'value': -0.2380952380952381}, {'label': 'blocker', 'value': -0.2380952380952381}, {'label': 'Microsoft', 'value': -0.2380952380952381}, {'label': 'profit', 'value': -0.2380952380952381}, {'label': 'Win', 'value': -0.2380952380952381}, {'label': 'suggest', 'value': -0.2380952380952381}, {'label': 'Bitdefender', 'value': -0.2380952380952381}, {'label': 'source', 'value': -0.2380952380952381}, {'label': 'pathaksudh', 'value': -0.2380952380952381}, {'label': 'workaround', 'value': -0.2380952380952381}, {'label': 'Help', 'value': -0.2380952380952381}, {'label': 'chromium', 'value': -0.2380952380952381}, {'label': 'changed', 'value': -0.2380952380952381}, {'label': 'container', 'value': -0.2380952380952381}, {'label': 'dark', 'value': -0.2380952380952381}, {'label': 'Add-on', 'value': -0.2380952380952381}, {'label': 'was', 'value': -0.7560975609756099}, {'label': 'learn', 'value': -0.25}, {'label': 'Thank', 'value': -0.25}, {'label': 'And', 'value': -0.75}, {'label': 'pieterratering', 'value': -0.08403361344537814}]}]
+
+        drawChart = (topN) => {
+            var chart;
+            nv.addGraph(function() {
+                const colorMap = {"Positive": "green",
+                              "Negative": "red"};
+
+                chart = nv.models.multiBarHorizontalChart()
+                    .x(function(d) { return d.label })
+                    .y(function(d) { return d.value })
+                    .barColor(function(d) {return colorMap[d.key]})
+                    .showControls(false)
+                    .showLegend(false)
+                    .margin({left: 100})
+                    .stacked(true);
+
+                chart.yAxis.tickFormat(d3.format(',.2f'));
+
+                chart.yAxis.axisLabel('<- Negative | Positive ->')
+                           .margin({right: 200})
+                chart.xAxis.axisLabel('Word').axisLabelDistance(40);
+
+                renderedData = [
+                    {"key": "Positive",
+                     "values": data[0].values.slice(0, topN)},
+                     {"key": "Negative",
+                     "values": data[1].values.slice(0, topN)},
+                ]
+                d3.select('#chart1 svg')
+                    .datum(renderedData)
+                    .call(chart);
+
+                //nv.utils.windowResize(chart.update);
+
+                chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+                chart.state.dispatch.on('change', function(state){
+                    nv.log('state', JSON.stringify(state));
+                });
+
+                //chart.options({height: 3000})
+                return chart;
+
+            }, function() {
+                d3.selectAll(".nv-bar").on('click',
+                    function(){
+                        d3.select(this)
+                        .attr("id", "selectedBar")  
+                        console.log(this)
+                        let word = this.__data__['label']
+                        let s = this.__data__['key'].toLocaleLowerCase()
+                        let search = word + " " + s[0] + s[1] + s[2]
+                        console.log(search)
+                        document.getElementsByTagName("input")[0].value = search
+
+                        const event = new KeyboardEvent('keyup', {
+                            key: 'Enter',
+                          });
+
+                        document.querySelector('input').dispatchEvent(event);
+                    });
+                });
+        }
+
+        drawChart(10)
+
+        $(".topn option").click(function() {
+            drawChart(parseInt(this.value))
+        })
+
+
+</script>
+</body>
+</html>
